@@ -3,7 +3,7 @@
 }
 
 .app-header {
-  height: 47px;
+  height: $app-header-height;
   background: $color-blue-dark;
 }
 
@@ -12,5 +12,6 @@
 }
 
 .app-footer{
+  height: $app-footer-height;
   background: $color-blue-dark;
 }

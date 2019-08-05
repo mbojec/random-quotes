@@ -5,12 +5,26 @@
 
 .footer__icons-container{
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: center;
+  padding-top: 0;
 
   a {
     margin-right: 1rem;
+    color: $color-white;
+    text-decoration: none;
+    flex-grow: 0;
+  }
+  span {
+    flex-grow: 1;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+
+    a{
+      margin-right: 0;
+    }
   }
 }
