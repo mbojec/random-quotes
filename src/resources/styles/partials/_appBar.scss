@@ -1,3 +1,4 @@
 .app-bar{
-
+  @extend %wrapper;
+  color: $color-white;
 }
