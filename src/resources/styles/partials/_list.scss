@@ -1,0 +1,38 @@
+.list{
+  ul{
+    width: 100%;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  li{
+    width: 100% * (1 / 3);
+    display: inline-block;
+    position: relative;
+    text-align: center;
+  }
+
+}
+
+.list__current-item{
+  font-size: 1.2rem;
+}
+
+%list-item-gradient{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.list__prev-item{
+  @extend %list-item-gradient;
+  background: linear-gradient(to right, white, transparent 110%);
+}
+
+.list__next-item{
+  @extend %list-item-gradient;
+  background: linear-gradient(to left, white, transparent 110%);
+}
