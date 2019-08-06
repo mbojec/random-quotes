@@ -1,0 +1,55 @@
+$min_width: 320px;
+$max_width: 1200px;
+$min_btn_width: 150px;
+$max_btn_width: 250px;
+
+.btn {
+  position: relative;
+  display: inline-block;
+  margin: 15px auto;
+  @include fluid-width($min_width, $max_width, $min_btn_width, $max_btn_width);
+
+  overflow: hidden;
+
+  border-width: 0;
+  outline: none;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+  background-color: $color-blue-dark;
+  color: #ecf0f1;
+
+  transition: background-color .3s;
+}
+
+.btn > * {
+  position: relative;
+}
+
+.btn span {
+  font-size: 0.7rem;
+  display: inline-block;
+  padding: 12px;
+}
+
+.btn:before {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: block;
+  width: 0;
+  padding-top: 0;
+  border-radius: 100%;
+  background-color: rgba(236, 240, 241, .3);
+  transform: translate(-50%, -50%);
+}
+
+.btn:active:before {
+  width: 120%;
+  padding-top: 120%;
+
+  transition: width .2s ease-out, padding-top .2s ease-out;
+}

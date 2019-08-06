@@ -1,6 +1,4 @@
 import React from 'react';
-import {faRedo} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function Main() {
   return(
@@ -12,7 +10,7 @@ function Main() {
           </blockquote>
         </div>
         <div className={'main__ui-panel col-xs-12'}>
-          <FontAwesomeIcon icon={faRedo}/>
+          <button className="btn" type="button"><span>Reload new quote</span></button>
         </div>
     </div>
   )
