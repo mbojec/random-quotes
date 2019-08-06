@@ -6,3 +6,4 @@ $screen-breakpoint-xl: 1200px;
 
 $app-header-height: 47px;
 $app-footer-height: 94px;
+$app-main-height: calc(100vh - #{$app-header-height} - #{$app-footer-height})

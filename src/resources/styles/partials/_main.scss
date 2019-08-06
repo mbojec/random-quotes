@@ -1,3 +1,36 @@
 .main{
   background: $color-white;
+  min-height: $app-main-height;
+}
+
+.main__blockquote{
+  @extend %center;
+
+  blockquote {
+    background:#EDEDED;
+    border-left:8px solid $color-blue-dark;
+    box-shadow:0 3px 15px rgba(0,0,0,.15);
+    color:#666;
+    font-size:1.1em;
+    font-style:italic;
+    font-weight:300;
+    line-height:1.6;
+    margin:50px auto;
+    padding:1.2em 30px 1.2em 75px;
+    overflow: hidden;
+    max-width: 800px;
+  }
+
+  blockquote span {
+    color:$color-blue-dark;
+    display:block;
+    font-size:1.3em;
+    font-weight:300;
+    letter-spacing:1px;
+    margin-top:.5em;
+  }
+}
+
+.main__ui-panel{
+  @extend %center;
 }
