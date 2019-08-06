@@ -1,10 +1,15 @@
 .main{
+  @extend %wrapper;
   background: $color-white;
   min-height: $app-main-height;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
 
 .main__blockquote{
   @extend %center;
+  flex-grow: 1;
 
   blockquote {
     background:#EDEDED;
@@ -32,5 +37,7 @@
 }
 
 .main__ui-panel{
+  font-size: 32px;
+  color: $color-blue-dark;
   @extend %center;
 }
