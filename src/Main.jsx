@@ -1,7 +1,8 @@
 import React, {Component} from "react";
-import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
-import {faChevronRight} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import axios from 'axios';
+import CategoryPanel from "./CategoryPanel";
+import ReloadPanel from "./ReloadPanel";
+import Blockquote from "./Blockquote";
 
 const list = ["All", "Inspire", "Management", "Sports", "Life", "Funny", "Love", "Art", "Students"];
 
@@ -11,6 +12,7 @@ class Main extends Component {
     super(props);
     this.state = {
       currentIndex: 0,
+      quote: {}
     }
   }
 
@@ -30,43 +32,40 @@ class Main extends Component {
     }
   }
 
-
-  getPrevItem(currentIndex){
-    let prevIndex = currentIndex === 0 ? 8 : (currentIndex - 1);
-    return <li key={prevIndex}><p>{list[prevIndex]}</p><span className={'list__prev-item'}/></li>
+  fetchNewQuote(){
+    let url;
+    if(this.state.currentIndex === 0){
+      url = `https://cors-anywhere.herokuapp.com/http://quotes.rest/qod.json`
+    } else {
+      let category = list[this.state.currentIndex].toLowerCase();
+      url = `http://quotes.rest/qod.json?category=${category}`
+    }
+    axios.get(url)
+      .then(res => {
+        const quote = res.data;
+        this.setState({ quote: quote.contents.quotes[0]});
+      })
   }
 
-  getCurrentItem(currentIndex){
-    return <li key={currentIndex}><p className={'list__current-item'}>{list[currentIndex]}</p></li>
-  }
-
-  getNextItem(currentIndex){
-    let nextIndex = currentIndex === 8 ? 0 : (currentIndex + 1);
-    return <li key={nextIndex}><p>{list[nextIndex]}</p><span className={'list__next-item'}/></li>
+  componentDidMount() {
+    axios.get(`https://cors-anywhere.herokuapp.com/http://quotes.rest/qod.json`)
+      .then(res => {
+        const quote = res.data;
+        this.setState({ quote: quote.contents.quotes[0]});
+      })
   }
 
   render() {
     return(
       <div className={'main'}>
         <div className={'main__blockquote col-xs-12'}>
-          <blockquote cite={'https://theysaidso.com/quote/sally-blount-if-we-ever-stop-thinking-about-the-person-we-want-to-become-we-stop'}>
-            <p>"If we ever stop thinking about the person we want to become, we stop learning and taking risks."</p>
-            <span>Sally Blount</span>
-          </blockquote>
+          <Blockquote cite={this.state.quote.permalink} author={this.state.quote.author} text={this.state.quote.quote}/>
         </div>
         <div className={'main__category-panel col-xs-12 row'}>
-          <div style={{textAlign:'right'}} className={'col-xs-1'} onClick={() => this.prev()}><FontAwesomeIcon icon={faChevronLeft}/></div>
-          <div className={'col-xs-10 list'}>
-            <ul>
-              {this.getPrevItem(this.state.currentIndex)}
-              {this.getCurrentItem(this.state.currentIndex)}
-              {this.getNextItem(this.state.currentIndex)}
-            </ul>
-          </div>
-          <div style={{textAlign:'left'}} className={'col-xs-1'} onClick={() => this.next()}><FontAwesomeIcon icon={faChevronRight}/></div>
+          <CategoryPanel currentIndex={this.state.currentIndex} onNext={() => this.next()} onPrev={() => this.prev()}/>
         </div>
         <div className={'main__ui-panel col-xs-12'}>
-          <button className="btn" type="button"><span>Reload new quote</span></button>
+          <ReloadPanel onReload={() => this.fetchNewQuote()}/>
         </div>
       </div>
     )
